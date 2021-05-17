@@ -11,7 +11,7 @@
 	<groupId>zupacademy.magno</groupId>
 	<artifactId>transacoes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transacoes</name>
+	<name>transacoes-ot4</name>
 	<description>Serviço de Transações da fase 4</description>
 	<properties>
 		<java.version>11</java.version>
@@ -45,6 +45,10 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-kafka</artifactId>
 		</dependency>
 	</dependencies>
 
