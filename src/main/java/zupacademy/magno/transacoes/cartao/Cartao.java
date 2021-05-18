@@ -17,7 +17,7 @@ public class Cartao {
     private String numero;
     @NotBlank @Email
     private String email;
-    @OneToMany(mappedBy = "cartao")
+    @OneToMany(mappedBy = "cartao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Transacao> transacoes = new ArrayList<>();
 
     @Deprecated
@@ -52,5 +52,6 @@ public class Cartao {
 
     public void addTransacao(Transacao transacao){
         this.transacoes.add(transacao);
+        transacao.setCartao(this);
     }
 }

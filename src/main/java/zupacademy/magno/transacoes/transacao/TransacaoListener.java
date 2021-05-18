@@ -35,14 +35,14 @@ public class TransacaoListener {
 
             if(possivelCartao.isPresent()){
                 Cartao cartaoEncontrado = possivelCartao.get();
-                novaTransacao.setCartao(cartaoEncontrado);
+                cartaoEncontrado.addTransacao(novaTransacao);
+                manager.atualizaEComita(cartaoEncontrado);
             } else{
                 Cartao novoCartao = new Cartao(mensagem.getCartao());
+                novoCartao.addTransacao(novaTransacao);
                 manager.salvaEComita(novoCartao);
                 logger.info("Novo cartão salvo com id={}", novoCartao.getId());
-                novaTransacao.setCartao(novoCartao);
             }
-            manager.atualizaEComita(novaTransacao);
 
         }catch (Exception e){
             logger.error("Erro ao tentar salvar novas transacoes");

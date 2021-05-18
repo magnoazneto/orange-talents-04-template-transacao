@@ -15,7 +15,7 @@ public class Transacao {
     private String idExterno;
     private BigDecimal valor;
     private LocalDateTime efetivadaEm;
-    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "cartao_id")
+    @ManyToOne
     private Cartao cartao;
     @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "estabelecimento_id")
     private Estabelecimento estabelecimento;
