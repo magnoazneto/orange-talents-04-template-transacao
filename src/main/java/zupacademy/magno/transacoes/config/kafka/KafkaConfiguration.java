@@ -10,7 +10,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import zupacademy.magno.transacoes.transacao.TransacaoResponse;
+import zupacademy.magno.transacoes.transacao.TransacaoTopicMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,17 +25,17 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public ConsumerFactory<String, TransacaoResponse> transactionConsumerFactory(){
+    public ConsumerFactory<String, TransacaoTopicMessage> transactionConsumerFactory(){
         StringDeserializer stringDeserializer = new StringDeserializer();
-        JsonDeserializer<TransacaoResponse> jsonDeserializer = new JsonDeserializer<>(TransacaoResponse.class, false);
-        ErrorHandlingDeserializer<TransacaoResponse> errorHandlingDeserializer = new ErrorHandlingDeserializer<>(jsonDeserializer);
+        JsonDeserializer<TransacaoTopicMessage> jsonDeserializer = new JsonDeserializer<>(TransacaoTopicMessage.class, false);
+        ErrorHandlingDeserializer<TransacaoTopicMessage> errorHandlingDeserializer = new ErrorHandlingDeserializer<>(jsonDeserializer);
 
         return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), stringDeserializer, errorHandlingDeserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, TransacaoResponse> kafkaListenerContainerFactory(){
-        ConcurrentKafkaListenerContainerFactory<String, TransacaoResponse> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, TransacaoTopicMessage> kafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, TransacaoTopicMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(transactionConsumerFactory());
 
         return factory;

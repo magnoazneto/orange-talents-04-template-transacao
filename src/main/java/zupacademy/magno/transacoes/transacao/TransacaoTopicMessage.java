@@ -1,26 +1,33 @@
 package zupacademy.magno.transacoes.transacao;
 
 import zupacademy.magno.transacoes.cartao.CartaoResponse;
+import zupacademy.magno.transacoes.estabelecimento.EstabelecimentoResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class TransacaoResponse {
+public class TransacaoTopicMessage {
 
     private String id;
     private BigDecimal valor;
     private CartaoResponse cartao;
     private LocalDateTime efetivadaEm;
+    private EstabelecimentoResponse estabelecimento;
 
     @Deprecated
-    public TransacaoResponse() {
+    public TransacaoTopicMessage() {
     }
 
-    public TransacaoResponse(String id, BigDecimal valor, CartaoResponse cartao, LocalDateTime efetivadaEm) {
+    public TransacaoTopicMessage(String id,
+                                 BigDecimal valor,
+                                 CartaoResponse cartao,
+                                 LocalDateTime efetivadaEm,
+                                 EstabelecimentoResponse estabelecimento) {
         this.id = id;
         this.valor = valor;
         this.cartao = cartao;
         this.efetivadaEm = efetivadaEm;
+        this.estabelecimento = estabelecimento;
     }
 
     public String getId() {
@@ -39,6 +46,10 @@ public class TransacaoResponse {
         return efetivadaEm;
     }
 
+    public EstabelecimentoResponse getEstabelecimento() {
+        return estabelecimento;
+    }
+
     @Override
     public String toString() {
         return "TransacaoResponse{" +
@@ -46,6 +57,7 @@ public class TransacaoResponse {
                 ", valor=" + valor +
                 ", cartao=" + cartao +
                 ", efetivadaEm=" + efetivadaEm +
+                ", estabelecimento=" + estabelecimento +
                 '}';
     }
 }
