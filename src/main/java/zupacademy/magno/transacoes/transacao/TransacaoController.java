@@ -23,6 +23,5 @@ public class TransacaoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(transacoes.stream().map(TransacaoResponse::new).collect(Collectors.toList()));
-
     }
 }

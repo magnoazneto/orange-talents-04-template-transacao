@@ -5,6 +5,7 @@ import zupacademy.magno.transacoes.transacao.Transacao;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Cartao {
     @NotBlank @Email
     private String email;
     @OneToMany(mappedBy = "cartao")
-    private List<Transacao> transacao;
+    private List<Transacao> transacoes = new ArrayList<>();
 
     @Deprecated
     public Cartao() {
@@ -45,7 +46,11 @@ public class Cartao {
         return email;
     }
 
-    public List<Transacao> getTransacao() {
-        return transacao;
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
+    public void addTransacao(Transacao transacao){
+        this.transacoes.add(transacao);
     }
 }

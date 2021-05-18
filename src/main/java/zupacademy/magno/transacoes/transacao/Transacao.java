@@ -12,6 +12,7 @@ public class Transacao {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String idExterno;
     private BigDecimal valor;
     private LocalDateTime efetivadaEm;
     @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "cartao_id")
@@ -23,18 +24,22 @@ public class Transacao {
     public Transacao() {
     }
 
-    public Transacao(BigDecimal valor,
+    public Transacao(String idExterno,
+                     BigDecimal valor,
                      LocalDateTime efetivadaEm,
-                     Cartao cartao,
                      Estabelecimento estabelecimento) {
+        this.idExterno = idExterno;
         this.valor = valor;
         this.efetivadaEm = efetivadaEm;
-        this.cartao = cartao;
         this.estabelecimento = estabelecimento;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getIdExterno() {
+        return idExterno;
     }
 
     public BigDecimal getValor() {
@@ -55,5 +60,9 @@ public class Transacao {
 
     public Estabelecimento getEstabelecimento() {
         return estabelecimento;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
 }
